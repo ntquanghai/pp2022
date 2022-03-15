@@ -85,6 +85,33 @@ def inputCourseInfo(studentNo, courseList):
 
     return returnedList
 
+def inputStudentDOB(studentNum): 
+    dayFlag = True
+    while(dayFlag):
+        dayInput = input("Enter the day of birth for student no." + str(studentNum))
+        if(isinstance(dayInput, int)):
+            if(dayInput<32 and dayInput>0):
+                dayFlag = False
+            else:
+                print("Entred day invalid. Please try again.")
+
+    monthInput = input("Enter the month of birth for student no." + str(studentNum))
+    monthFlag = True
+    while(monthFlag):
+        monthFlag = input("Enter the month of birth for student no." + str(studentNum))
+        if(isinstance(monthInput, int)):
+            if(monthInput == 2 and dayInput>29):
+                print("Entered month invalid. Please try again")
+            elif(monthInput<13 and monthInput>0):
+                monthFlag = False
+            else:
+                print("Entered month invalid. Please try again")
+    yearInput = input("Enter the year of birth for student no." + str(studentNum))
+
+    returnedValue = str(dayInput)+"/"+str(monthInput)+"/"+yearInput
+    return returnedValue
+
+
 
 def inputStudentInfo(studentList):
     studentsNum = int(input("Enter the number of students: "))
@@ -93,16 +120,19 @@ def inputStudentInfo(studentList):
         tempDict = {
             "name": "",
             "ID_CONSTANT": "",
+            "dob":"",
             "courses": "",
         }
         print("=== Student inputs ===")
         tempName = input("Enter the name for student no." + str(i) + ": ")
         tempId = input("Enter the ID for student no." + str(i) + ": ")
+        tempDOB = inputStudentDOB(i)
         courseList = inputCourseInfo(i, coursesList)
 
         tempDict["name"] = tempName
         tempDict["ID_CONSTANT"] = tempId
         tempDict["courses"] = courseList
+        tempDict["dob"] = tempDOB
         studentList.append(tempDict)
     return studentList
 
