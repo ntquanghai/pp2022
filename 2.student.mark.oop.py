@@ -217,13 +217,6 @@ class Utils:
 def main(): 
     classroom = Class()
     while(True):
-        # 1. Enter students information (Name, ID, Date of birth, Enrolled courses)
-        # 2. List all available students
-        # 3. Show student's grades
-        # 4. List all available courses
-        # 5. Add a course
-        # 6. Modify students' grades
-        # 0. Exit the program
         print("#1. Enter students information (Name, ID, Date of birth, Enrolled courses)")
         print("#2. Show students' grades")
         print("#3. List all available students")
