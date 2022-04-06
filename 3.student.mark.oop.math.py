@@ -113,7 +113,7 @@ class Student:
         index = 0
 
         # numOfCourses = int(input("Enter student's"+ " number of enrolled courses: "))
-        numOfCourses = (Utils.cursesInput(stdscr,"Enter the student's number of enrolled courses"))
+        numOfCourses = (Utils.cursesInput(stdscr,"Enter the student's number of enrolled courses: "))
 
         inputFlag = True
         while(inputFlag):
@@ -122,11 +122,11 @@ class Student:
                 stdscr.addstr("Invalid input. Please try again")
             else:
                 inputFlag = False
-        courses = Course.listCourse(coursesList)
+        courses = Course.listCourse(stdscr)
         print("\n")
         while index < int(numOfCourses):
             # inputCourse = input("Enter student's course no." + str(index+1) +": ")
-            inputCourse = Utils.cursesInput("Enter student's course no." + str(index+1) + ": ")
+            inputCourse = Utils.cursesInput(stdscr,"Enter student's course no." + str(index+1) + ": ")
 
             if (inputCourse in tempList):
                 # print("Course " + inputCourse + " has already been added. Please try again.")
@@ -147,9 +147,9 @@ class Student:
 
         return returnedList
     
-    def inputStudentInfo(self, stdscr):
+    def inputStudentInfo(stdscr):
         # studentsNum = int(input("Enter the number of students: "))
-        studentsNum = Utils.cursesInput(stdscr, "Enter the number of students:" )
+        studentsNum = Utils.cursesInput(stdscr, "Enter the number of students: " )
         for i in range(0, int(studentsNum)):
             tempDict = {
                 "name": "",
@@ -193,7 +193,7 @@ class Course:
 
     def inputCourseInfo(self, stdscr):
         # coursesNum = int(input("Enter the number of added courses: "))
-        coursesNum = Utils.cursesInput(stdscr, "Enter the number of added courses:")
+        coursesNum = Utils.cursesInput(stdscr, "Enter the number of added courses: ")
         for i in range(0, int(coursesNum)):
             tempDict = {
                 "name":"",
@@ -225,7 +225,7 @@ class Class:
 
     def modifyGrades(self, stdscr):
         checkList = []
-        courses = Course.listCourse(coursesList)        
+        courses = Course.listCourse(stdscr)        
         if(not studentList):
             print("Student list is incomplete.")
             stdscr.addstr("Student list is incomplete.")
@@ -303,23 +303,21 @@ def main(stdscr):
     stdscr.refresh()
     curses.echo()
 
-    classroom = Class()
-
     while(True):
-        print("#1. Enter students information (Name, ID, Date of birth, Enrolled courses)")
-        stdscr.addstr("#1. Enter students information (Name, ID, Date of birth, Enrolled courses)")
-        print("#2. Show students' grades")
-        stdscr.addstr("#2. Show students' grades")
-        print("#3. List all available students")
-        stdscr.addstr("#3. List all available students")
-        print("#4. List all available courses")
-        stdscr.addstr("#4. List all available courses")
-        print("#5. Add a course")
-        stdscr.addstr("#5. Add a course")
-        print("#6. Modify students' grades")
-        stdscr.addstr("#6. Modify students' grades")
-        print("#0. Exit the program")
-        stdscr.addstr("#0. Exit the program")
+        # print("#1. Enter students information (Name, ID, Date of birth, Enrolled courses)")
+        stdscr.addstr("#1. Enter students information (Name, ID, Date of birth, Enrolled courses) ")
+        # print("#2. Show students' grades")
+        stdscr.addstr("#2. Show students' grades ")
+        # print("#3. List all available students")
+        stdscr.addstr("#3. List all available students ")
+        # print("#4. List all available courses")
+        stdscr.addstr("#4. List all available courses ")
+        # print("#5. Add a course")
+        stdscr.addstr("#5. Add a course ")
+        # print("#6. Modify students' grades ")
+        stdscr.addstr("#6. Modify students' grades ")
+        # print("#0. Exit the program")
+        stdscr.addstr("#0. Exit the program ")
 
         # option = int(input("Enter the option: "))
         option = Utils.cursesInput(stdscr, "Enter the option: ")
@@ -329,13 +327,13 @@ def main(stdscr):
         elif int(option) ==2:
             Student.showGrade(stdscr)
         elif int(option) ==3:
-            classroom.listStudents(stdscr)
+            Class.listStudents(stdscr)
         elif int(option) ==4:
             Course.listCourse(stdscr)
         elif int(option) ==5:
             Course.inputCourseInfo(stdscr)
         elif int(option) ==6:
-            classroom.modifyGrades(stdscr)
+            Class.modifyGrades(stdscr)
         elif int(option) ==0:
             print("Session ended.")
             break
