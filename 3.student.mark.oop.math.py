@@ -191,7 +191,7 @@ class Course:
         # print("\n")
         return listOfCourse
 
-    def inputCourseInfo(self, stdscr):
+    def inputCourseInfo(stdscr):
         # coursesNum = int(input("Enter the number of added courses: "))
         coursesNum = Utils.cursesInput(stdscr, "Enter the number of added courses: ")
         for i in range(0, int(coursesNum)):
@@ -212,7 +212,7 @@ class Class:
         self.studentList = []
         self.courseList = coursesList
         
-    def listStudents(self, stdscr): 
+    def listStudents(stdscr): 
         def listStudentCourse(studentCourseList):
             returnedCourseList = []
             for i in range(0, len(studentCourseList)):
@@ -223,7 +223,7 @@ class Class:
             stdscr.addstr("Student: "+ str(studentList[i]["name"]) + " ID: " + str(studentList[i]["ID_CONSTANT"]) + "- Enrolled in courses: " + str(listStudentCourse(studentList[i]["courses"])))
             print("Student: "+ str(studentList[i]["name"]) + " ID: " + str(studentList[i]["ID_CONSTANT"]) + "- Enrolled in courses: " + str(listStudentCourse(studentList[i]["courses"])))
 
-    def modifyGrades(self, stdscr):
+    def modifyGrades(stdscr):
         checkList = []
         courses = Course.listCourse(stdscr)        
         if(not studentList):
@@ -255,7 +255,7 @@ class Class:
     def roundDownGrades(self,input):
         return math.floor(input)
 
-    def averageGrades(self, stdscr):
+    def averageGrades(stdscr):
         # studentName = input("\nEnter student's name to see their average grades: ")
         studentName = Utils.cursesInput(stdscr, "Enter student's name to see their average grades: ")
 
