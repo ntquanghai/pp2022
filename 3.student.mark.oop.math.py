@@ -146,6 +146,27 @@ class Student:
                 stdscr.addstr("The entered course does not exist. Please try again.")
 
         return returnedList
+    
+    def inputStudentInfo(self, stdscr):
+        # studentsNum = int(input("Enter the number of students: "))
+        studentsNum = Utils.cursesInput(stdscr, "Enter the number of students:" )
+        for i in range(0, int(studentsNum)):
+            tempDict = {
+                "name": "",
+                "ID_CONSTANT": "",
+                "dob":"",
+                "courses": "",
+                "GPA": 0,
+            }
+            tempStudent = Student(stdscr)
+
+            tempDict["name"] = tempStudent.getName()
+            tempDict["ID_CONSTANT"] = tempStudent.getId()
+            tempDict["courses"] = tempStudent.getCourses()
+            tempDict["dob"] = tempStudent.getDob()
+            studentList.append(tempDict)
+        
+        return tempDict
 
         
 class Course:
@@ -170,32 +191,6 @@ class Course:
         # print("\n")
         return listOfCourse
 
-class Class:
-    def __init__(self) -> None:
-        self.studentList = []
-        self.courseList = coursesList
-
-    def inputStudentInfo(self, stdscr):
-        # studentsNum = int(input("Enter the number of students: "))
-        studentsNum = Utils.cursesInput(stdscr, "Enter the number of students:" )
-        for i in range(0, int(studentsNum)):
-            tempDict = {
-                "name": "",
-                "ID_CONSTANT": "",
-                "dob":"",
-                "courses": "",
-                "GPA": 0,
-            }
-            tempStudent = Student(stdscr)
-
-            tempDict["name"] = tempStudent.getName()
-            tempDict["ID_CONSTANT"] = tempStudent.getId()
-            tempDict["courses"] = tempStudent.getCourses()
-            tempDict["dob"] = tempStudent.getDob()
-            studentList.append(tempDict)
-        
-        return tempDict
-
     def inputCourseInfo(self, stdscr):
         # coursesNum = int(input("Enter the number of added courses: "))
         coursesNum = Utils.cursesInput(stdscr, "Enter the number of added courses:")
@@ -211,9 +206,12 @@ class Class:
             tempDict["id"] = tempCourse.courseId
             tempDict["credits"] = tempCourse.courseCredits
             coursesList.append(tempDict)
+
+class Class:
+    def __init__(self) -> None:
+        self.studentList = []
+        self.courseList = coursesList
         
-
-
     def listStudents(self, stdscr): 
         def listStudentCourse(studentCourseList):
             returnedCourseList = []
@@ -327,7 +325,7 @@ def main(stdscr):
         option = Utils.cursesInput(stdscr, "Enter the option: ")
 
         if int(option) ==1:
-            classroom.inputStudentInfo(stdscr)
+            Student.inputStudentInfo(stdscr)
         elif int(option) ==2:
             Student.showGrade(stdscr)
         elif int(option) ==3:
@@ -335,7 +333,7 @@ def main(stdscr):
         elif int(option) ==4:
             Course.listCourse(stdscr)
         elif int(option) ==5:
-            classroom.inputCourseInfo(stdscr)
+            Course.inputCourseInfo(stdscr)
         elif int(option) ==6:
             classroom.modifyGrades(stdscr)
         elif int(option) ==0:
