@@ -2,6 +2,7 @@ import math
 import numpy as np
 import curses
 from curses import wrapper
+import zipfile
 
 class Utils:
     def find(lst, key, value):
@@ -16,3 +17,11 @@ class Utils:
         input = stdscr.getstr()
 
         return input.decode()
+
+    # Function : file_compress
+    def file_compress(inp_file_names, out_zip_file):
+        compression = zipfile.ZIP_DEFLATED
+        zf = zipfile.ZipFile(out_zip_file, mode="w")
+
+        for file_to_write in inp_file_names:
+            zf.write(file_to_write, file_to_write, compress_type=compression)

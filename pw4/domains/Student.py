@@ -2,12 +2,14 @@ import math
 import numpy as np
 import curses
 from curses import wrapper
-import Utils
-import Course
+from domains.Utils import Utils
+from domains.Course import Course
 import json
+import ast
+
 
 class Student:
-    def __init__(self,stdscr):
+    def __init__(self,stdscr, coursesList):
         stdscr.addstr("Enter student's name: ")
         self.name = stdscr.getstr()
         # self.name = input("Enter student's name: ")
@@ -18,7 +20,7 @@ class Student:
         # self.id_constant = input("Enter student's ID: ")
 
         self.dob = self.inputStudentDOB(stdscr)
-        self.courses = self.inputCourseEnrollment(stdscr)
+        self.courses = self.inputCourseEnrollment(stdscr, coursesList)
     
     def getName(self):
         return self.name
@@ -93,7 +95,7 @@ class Student:
                 stdscr.addstr("Invalid input. Please try again")
             else:
                 inputFlag = False
-        courses = Course.listCourse(stdscr)
+        courses = Course.listCourse(stdscr, coursesList)
         print("\n")
         while index < int(numOfCourses):
             # inputCourse = input("Enter student's course no." + str(index+1) +": ")
@@ -118,7 +120,7 @@ class Student:
 
         return returnedList
     
-    def inputStudentInfo(stdscr, studentList):
+    def inputStudentInfo(stdscr, studentList, coursesList):
         # studentsNum = int(input("Enter the number of students: "))
         studentsNum = Utils.cursesInput(stdscr, "Enter the number of students: " )
         for i in range(0, int(studentsNum)):
@@ -129,14 +131,14 @@ class Student:
                 "courses": "",
                 "GPA": 0,
             }
-            tempStudent = Student(stdscr)
+            tempStudent = Student(stdscr, coursesList)
 
             tempDict["name"] = tempStudent.getName()
             tempDict["ID_CONSTANT"] = tempStudent.getId()
             tempDict["courses"] = tempStudent.getCourses()
             tempDict["dob"] = tempStudent.getDob()
-            with open("../studentList.txt","w") as f:
-                f.write(json.dumps(tempDict))
+            with open("studentList.txt","w") as f:
+                f.write(json.dumps(str(tempDict, indent=4)))
             studentList.append(tempDict)
         
         return tempDict

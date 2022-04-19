@@ -1,5 +1,5 @@
-import Course
-import Utils
+from domains.Course import Course
+from domains.Utils import Utils
 import math
 import numpy as np
 import json

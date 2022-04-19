@@ -46,7 +46,7 @@ class Student:
 
         # self.id_constant = input("Enter student's ID: ")
 
-        self.dob = self.inputStudentDOB(stdscr,"haha")
+        self.dob = self.inputStudentDOB(stdscr)
         self.courses = self.inputCourseEnrollment(stdscr)
     
     def getName(self):
@@ -58,9 +58,8 @@ class Student:
     def getCourses(self):
         return self.courses
 
-    def inputStudentDOB(self,stdscr, string): 
+    def inputStudentDOB(self,stdscr): 
         dayFlag = True
-        haha = string
         while(dayFlag): 
             # dayInput = int(input("Enter the student's day of birth: "))
             stdscr.addstr("Enter the student's day of birth: ")

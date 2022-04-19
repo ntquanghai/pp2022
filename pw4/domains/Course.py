@@ -1,4 +1,4 @@
-import Utils
+from domains.Utils import Utils
 import cursesInput
 import json
 
@@ -34,12 +34,12 @@ class Course:
                 "id":"",
                 "credits": "",
             }
-            tempCourse = Course()
+            tempCourse = Course(stdscr)
 
             tempDict["name"] = tempCourse.courseName
             tempDict["id"] = tempCourse.courseId
             tempDict["credits"] = tempCourse.courseCredits
             coursesList.append(tempDict)
 
-            with open("../coursesList.txt","w") as f:
-                f.write(json.dumps(tempDict))
+            with open("/coursesList.txt","w") as f:
+                f.write(json.dumps(str(tempDict)))

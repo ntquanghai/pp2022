@@ -1,10 +1,16 @@
-import domains
+from domains.Class import Class
+from domains.Course import Course
+from domains.Student import Student
+from domains.Utils import Utils
 import cursesInput
 import output
 import math
 import numpy as np
 import curses
 from curses import wrapper
+import os
+import json
+
 studentList = []
 
 coursesList = [
@@ -35,10 +41,18 @@ coursesList = [
     },
 ]
 
+if(os.stat("coursesList.txt").st_size == 0):
+    with open("coursesList.txt","w") as f:
+        f.write(json.dumps((str(coursesList)), indent=4))
+else:
+    print("List imported.")
+
 def main(stdscr): 
     stdscr.clear()
     stdscr.refresh()
     curses.echo()
+
+
 
     while(True):
         # print("#1. Enter students information (Name, ID, Date of birth, Enrolled courses)")
@@ -57,22 +71,24 @@ def main(stdscr):
         stdscr.addstr("#0. Exit the program ")
 
         # option = int(input("Enter the option: "))
-        option = domains.Utils.cursesInput(stdscr, "Enter the option: ")
+        option = Utils.cursesInput(stdscr, "Enter the option: ")
 
         if int(option) ==1:
-            domains.Student.inputStudentInfo(stdscr, studentList)
+            Student.inputStudentInfo(stdscr, studentList, coursesList)
         elif int(option) ==2:
-            domains.Student.showGrade(stdscr, studentList)
+            Student.showGrade(stdscr, studentList)
         elif int(option) ==3:
-            domains.Class.listStudents(stdscr, studentList)
+            Class.listStudents(stdscr, studentList)
         elif int(option) ==4:
-            domains.Course.listCourse(stdscr, coursesList)
+            Course.listCourse(stdscr, coursesList)
         elif int(option) ==5:
-            domains.Course.inputCourseInfo(stdscr, coursesList)
+            Course.inputCourseInfo(stdscr, coursesList)
         elif int(option) ==6:
-            domains.Class.modifyGrades(stdscr, studentList)
+            Class.modifyGrades(stdscr, studentList)
         elif int(option) ==0:
             print("Session ended.")
             break
+
+        Utils.file_compress(["studentList.txt","coursesList.txt"],"students.zip")
 
 wrapper(main)

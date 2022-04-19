@@ -1,0 +1,1 @@
+"[{'name': 'LA', 'credits': 3, 'id': 0}, {'name': 'CN', 'credits': 3, 'id': 1}, {'name': 'PS', 'credits': 3, 'id': 2}, {'name': 'SE', 'credits': 4, 'id': 3}, {'name': 'Python', 'credits': 5, 'id': 4}]"
